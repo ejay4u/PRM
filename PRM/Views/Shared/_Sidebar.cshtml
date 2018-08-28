@@ -1,0 +1,69 @@
+﻿@using PRM.Controllers
+<aside class="main-sidebar">
+    <section class="sidebar">
+        @* BEGIN Search *@
+        <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                    <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
+        </form>
+        @* END Search *@
+        @* BEGIN Menu *@
+        <ul class="sidebar-menu">
+            <li class="header">HEADER</li>
+            @*<li class="@(ViewContext.RouteData.Values["Action"].ToString() == nameof(DashboardController.Index) ? "active" : "")">
+                <a href="@Url.Action("Index", "Dashboard")"><i class="fa fa-dashboard"></i> <span>Home</span></a>
+            </li>*@
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == nameof(DashboardController.Doctor) ? "active" : "")">
+                <a href="@Url.Action("Doctor", "Dashboard")"><i class="fa fa-stethoscope"></i> <span>Doctor</span></a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == nameof(DashboardController.Examination) ? "active" : "")">
+                <a href="@Url.Action("Examination", "Dashboard")"><i class="fa fa-files-o"></i> <span>Examination</span></a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == nameof(DashboardController.Client) ? "active" : "")">
+                <a href="@Url.Action("Client", "Dashboard")"><i class="fa fa-users"></i> <span>Client</span></a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == nameof(DashboardController.UltraSound) ? "active" : "")">
+                <a href="@Url.Action("UltraSound", "Dashboard")"><i class="fa fa-thermometer-4"></i> <span>UltraSound</span></a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == nameof(DashboardController.Radiology) ? "active" : "")">
+                <a href="@Url.Action("Radiology", "Dashboard")"><i class="fa fa-thermometer-4"></i> <span>Radiology</span></a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == nameof(DashboardController.Endoscopy) ? "active" : "")">
+                <a href="@Url.Action("Endoscopy", "Dashboard")"><i class="fa fa-thermometer-4"></i> <span>Endoscopy</span></a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == nameof(DashboardController.ECG) ? "active" : "")">
+                <a href="@Url.Action("ECG", "Dashboard")"><i class="fa fa-thermometer-4"></i> <span>ECG / EKG</span></a>
+            </li>
+            @*<li class="treeview @(ViewContext.RouteData.Values["Action"].ToString() == nameof(DashboardController.GeneralAd) || ViewContext.RouteData.Values["Action"].ToString() == nameof(DashboardController.CampaignAd) ? "active" : "")">
+                <a href="#">
+                    <i class="fa fa-flash"></i>
+                    <span>Create Ads</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="@Url.Action("GeneralAd", "Dashboard")"><span>General Advert</span></a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("CampaignAd", "Dashboard")"><span>Campaign Advert</span></a>
+                    </li>
+                </ul>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == nameof(DashboardController.Passiton) ? "active" : "")">
+                <a href="@Url.Action("Passiton", "Dashboard")"><i class="fa fa-flag-checkered"></i> <span>Passiton</span></a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == nameof(DashboardController.CodeFailure) ? "active" : "")">
+                <a href="@Url.Action("CodeFailure", "Dashboard")"><i class="fa fa-user-times"></i> <span>Code Failure</span></a>
+            </li>*@
+        </ul>
+        @* END Menu *@
+    </section>
+</aside>

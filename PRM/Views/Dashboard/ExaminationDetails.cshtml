@@ -1,0 +1,115 @@
+﻿@model PRM.Models.Examination
+
+@{
+    ViewBag.Title = "ExaminationDetails";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<h2>Examination Details</h2>
+
+<div>
+    <h4>Examination</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExaminationType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExaminationType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InternalClient)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InternalClient)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DirectService)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DirectService)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CooperateClient)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CooperateClient)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CtAdult)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CtAdult)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CtChildren)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CtChildren)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeUpdated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeUpdated)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "EditExamination", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

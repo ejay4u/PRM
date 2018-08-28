@@ -1,0 +1,147 @@
+﻿@model PRM.Models.LabRequest
+
+@{
+    ViewBag.Title = "UltraSound Details";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<h2>ECG / EKG Details</h2>
+
+<div>
+    <h4>Campaign</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ClientId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClientId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClientName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClientName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Consultant)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Consultant)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ward)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ward)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DoctorName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DoctorName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClinicalSummary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClinicalSummary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UG1Endoscopy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UG1Endoscopy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Colonoscopy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Colonoscopy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sigmoidoscopy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sigmoidoscopy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Proctoscopy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Proctoscopy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherRequest)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherRequest)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RequestDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RequestDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeUpdated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeUpdated)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "EditUltraSound", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "UltraSound")
+</p>

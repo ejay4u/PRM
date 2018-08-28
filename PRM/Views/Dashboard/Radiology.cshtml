@@ -1,0 +1,388 @@
+﻿@using System.Web.UI.WebControls
+@using MongoDB.Driver
+@model PRM.ViewModels.LabViewModel
+
+@{
+    ViewBag.Title = "Radiology";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+    ViewBag.Description = "Manage All Radiology Requests";
+}
+
+
+@using (Html.BeginForm("Radiology", "Dashboard"))
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <h3 class="box-title">Create A New Radiology Request</h3>
+
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+            </div>
+        </div>
+        <div class="box-body">
+
+            <div class="form-horizontal">
+                <asp:Label ID="lblUtr" />
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LabRequest.ClientId, new { @class = "control-label col-lg-2" })
+                    <div class="col-lg-10">
+                        @Html.DropDownListFor(m => m.LabRequest.ClientId, Model.ClientIdList, "ClientID", new { @id = "ClientID-DropdownID", htmlAttributes = new { @class = "form-control select2", style = "width: 100%" } })
+                        @Html.ValidationMessageFor(model => model.LabRequest.ClientId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="ClientName" class="control-label col-lg-2">Client FullName</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="ClientName" class="form-control" id="fullName" disabled>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LabRequest.Ward, new { @class = "control-label col-lg-2" })
+                    <div class="col-lg-10">
+                        @Html.EditorFor(model => model.LabRequest.Ward, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LabRequest.Ward, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LabRequest.DoctorName, new { @class = "control-label col-lg-2" })
+                    <div class="col-lg-10">
+                        @Html.DropDownListFor(m => m.LabRequest.DoctorName, Model.DoctorIdList, "Requesting Doctor", new { htmlAttributes = new { @class = "form-control select2", style = "width: 100%" } })
+                        @Html.ValidationMessageFor(model => model.LabRequest.DoctorName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Brief Clinical History</label>
+                    <div class="col-lg-10">
+                        @Html.TextAreaFor(model => model.LabRequest.ClinicalSummary, new { @class = "form-control", @cols = "100", @rows = "4" } )
+                        @Html.ValidationMessageFor(model => model.LabRequest.ClinicalSummary, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Previous X-ray Results</label>
+                    <div class="col-lg-10">
+                        @Html.TextAreaFor(model => model.LabRequest.PreviousResults, new { @class = "form-control", @cols = "100", @rows = "4" })
+                        @Html.ValidationMessageFor(model => model.LabRequest.PreviousResults, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Alergy to Intravenous Iodinated Contrast Agents</label>
+                    <div class="col-lg-10">
+                        @Html.DropDownListFor(m => m.LabRequest.HasAlergy, Model.AlergyList, new {@class = "form-control select2", style = "width: 100%"})
+                        @Html.ValidationMessageFor(model => model.LabRequest.HasAlergy, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LabRequest.PaymentType, new { @class = "control-label col-lg-2" })
+                    <div class="col-lg-10">
+                        @Html.DropDownListFor(m => m.LabRequest.PaymentType, Model.PaymentTypeList, "Select Payment Type", new { @id = "PaymentType-DropdownID", htmlAttributes = new { @class = "form-control select2", style = "width: 100%" } })
+                        @Html.ValidationMessageFor(model => model.LabRequest.PaymentType, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LabRequest.ExaminationCategory, new { @class = "control-label col-lg-2" })
+                    <div class="col-lg-10">
+                        @Html.DropDownListFor(m => m.LabRequest.ExaminationCategory, Model.CategoryList, "Select Examination Category", new { htmlAttributes = new { @class = "form-control select2", style = "width: 100%" } })
+                        @Html.ValidationMessageFor(model => model.LabRequest.ExaminationCategory, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Examination Type</label>
+                    <div class="col-lg-10">
+                        <div id="ExaminationTypeContainer">
+                            @Html.Action("ExaminationTypeListView")
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Examination.ExaminationType, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LabRequest.ScanId, new { @class = "control-label col-lg-2" })
+                    <div class="col-lg-10">
+                        @Html.EditorFor(model => model.LabRequest.ScanId, new { htmlAttributes = new { @class = "form-control" } })
+                        @*@Html.ValidationMessageFor(model => model.LabRequest.ScanId, "", new { @class = "text-danger" })*@
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Request Exams</label>
+                    <div class="col-lg-10">
+                        @Html.TextAreaFor(model => model.LabRequest.RequestedExams, new { @class = "form-control", @cols = "100", @rows = "4" })
+                        @Html.ValidationMessageFor(model => model.LabRequest.RequestedExams, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                @Html.HiddenFor(model => Model.Id)
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-4">
+                        <button type="reset" class="btn btn-default">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Radiology</h3>
+                <div class="box-tools">
+                    <b class="label label-danger" style="padding: 8.5px">Click to Show or Hide Column:</b>
+                    <div class="btn-group btn-group-sm">
+                        <a class="showHide btn btn-primary" data-column="0">Id</a>
+                        <a class="showHide btn btn-primary" data-column="1">ClientId</a>
+                        <a class="showHide btn btn-primary" data-column="2">ClientName</a>
+                        <a class="showHide btn btn-primary" data-column="3">Ward</a>
+                        <a class="showHide btn btn-primary" data-column="4">DoctorName</a>
+                        <a class="showHide btn btn-primary" data-column="5">ClinicalHistory</a>
+                        <a class="showHide btn btn-primary" data-column="6">HasAlergy</a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive">
+                <table id="RadiologyTable" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                Id
+                            </th>
+                            <th>
+                                ClientId
+                            </th>
+                            <th>
+                                ClientName
+                            </th>
+                            <th>
+                                Ward
+                            </th>
+                            <th>
+                                DoctorName
+                            </th>
+                            <th>
+                                ClinicalHistory
+                            </th>
+                            <th>
+                                HasAlergy
+                            </th>
+                            <th>
+                                CreatedBy
+                            </th>
+                            <th>
+                                TimeCreated
+                            </th>
+                            <th>
+                                UpdatedBy
+                            </th>
+                            <th>
+                                TimeUpdated
+                            </th>
+                            <th>
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody></tbody>
+
+                    <tfoot>
+                        <tr>
+                            <th>
+                                Id
+                            </th>
+                            <th>
+                                ClientId
+                            </th>
+                            <th>
+                                ClientName
+                            </th>
+                            <th>
+                                Ward
+                            </th>
+                            <th>
+                                DoctorName
+                            </th>
+                            <th>
+                                ClinicalHistory
+                            </th>
+                            <th>
+                                HasAlergy
+                            </th>
+                            <th>
+                                CreatedBy
+                            </th>
+                            <th>
+                                TimeCreated
+                            </th>
+                            <th>
+                                UpdatedBy
+                            </th>
+                            <th>
+                                TimeUpdated
+                            </th>
+                            <th>
+                                Action
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#LabRequest_ExaminationCategory').prop("disabled", true);
+            $('#ExaminationType-DropdownID').prop("disabled", true);
+
+            // Populate State/Provinces
+            $('#ClientID-DropdownID').change(function () {
+                $('#fullName').val(this.value);
+            });
+
+            $('#PaymentType-DropdownID').change(function () {
+                if (this.value !== "") {
+                    $('#LabRequest_ExaminationCategory').prop("disabled", false);
+                    $('#ExaminationType-DropdownID').prop("disabled", false);
+                }
+                else {
+                    $('#LabRequest_ExaminationCategory').prop("disabled", true);
+                    $('#ExaminationType-DropdownID').prop("disabled", true);
+                }
+            });
+
+            $('#LabRequest_ExaminationCategory').change(function () {
+                if (this.value !== "") {
+                    var selectedCategory = this.value;
+                    var paymenttype = $('#PaymentType-DropdownID').val();
+                    console.log(selectedCategory);
+                    $('#ExaminationTypeContainer').load('@Url.Action("ExaminationTypeListView")?category=' + selectedCategory + '&paymentType=' + paymenttype);
+                }
+            });
+
+            //Datemask dd/mm/yyyy
+            $("#datemask").inputmask("dd/mm/yyyy", { "placeholder": "dd/mm/yyyy" });
+
+
+            $("#RadiologyTable").dataTable({
+                ajax: {
+                    url: "/api/labrequests/?type=Radiology",
+                    dataSrc: ""
+                },
+                dom: 'Bfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
+                ],
+                columns: [
+                    {
+                        data: "Id"
+                    },
+                    {
+                        data: "ClientId"
+                    },
+                    {
+                        data: "ClientName"
+                    },
+                    {
+                        data: "Ward"
+                    },
+                    {
+                        data: "DoctorName"
+                    },
+                    {
+                        data: "ClinicalSummary"
+                    },
+                    {
+                        data: "HasAlergy"
+                    },
+                    {
+                        data: "CreatedBy"
+                    },
+                    {
+                        data: "TimeCreated",
+                        render: function (data, type, Radiology) {
+                            return new Date(Radiology.TimeCreated).toDateString();
+                        }
+                    },
+                    {
+                        data: "UpdatedBy"
+                    },
+                    {
+                        data: "TimeUpdated",
+                        render: function (data, type, Radiology) {
+                            return new Date(Radiology.TimeUpdated).toDateString();
+                        }
+                    },
+                    {
+                        data: "Id",
+                        render: function (data, type, Radiology) {
+                            return "<a title='Details' class='btn btn-sm btn-info' href='/dashboard/Radiologydetails/" +
+                                Radiology.Id + "'><i class='fa fa-hand-o-left fa-lg' aria-hidden='true'></i></a>" + " | " +
+                                "<a title='Edit' class='btn btn-sm btn-primary' href='/dashboard/editRadiology/" +
+                                Radiology.Id + "'><i class='fa fa-pencil-square fa-lg' aria-hidden='true'></i></a>" + " | " +
+                                "<a title='Delete' href='#' data-id=" + Radiology.Id + " class='js-delete btn btn-sm btn-danger'><i class='fa fa-trash fa-lg' aria-hidden='true'></i></a>";
+                        }
+                    }
+                ]
+            });
+
+            $('#RadiologyTable tfoot th').each(function () {
+                var placeHolderTitle = $('#RadiologyTable thead th').eq($(this).index()).text();
+                $(this).html('<input type="text" class="form-control input input-sm" placeholder = "Search ' + placeHolderTitle + '" />');
+
+                initSearch();
+            });
+
+            function initSearch() {
+                $('#RadiologyTable').dataTable().api().columns().every(function () {
+                    var column = this;
+                    $(this.footer()).find('input').on('keyup change', function () {
+                        column.search(this.value).draw();
+                    });
+                });
+            }
+
+            $('a.showHide').on("click", function (e) {
+                e.preventDefault();
+                // Get the column API object
+                var column = $('#RadiologyTable').dataTable().api().column($(this).attr('data-column'));
+                // Toggle the visibility
+                column.visible(!column.visible());
+
+            });
+
+            $('#RadiologyTable tbody').on("click", 'a.js-delete', function () {
+                var anchor = $(this);
+                bootbox.confirm("Are you sure you want to delete this Radiology and all its data?", function (result) {
+                    if (result) {
+                        var dialog = bootbox.dialog({
+                            message: '<p class="text-center"><i class="fa fa-refresh fa-spin"></i> Processing request...</p>',
+                            closeButton: false
+                        });
+                        $.ajax({
+                            url: "/api/Radiologys/" + anchor.attr("data-id"),
+                            method: "DELETE",
+                            success: function () {
+                                //console.log("success);
+                                dialog.modal('hide'); //close the custom dialog
+                                $('#RadiologyTable').dataTable().api().row(anchor.parents("tr")).remove().draw();
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

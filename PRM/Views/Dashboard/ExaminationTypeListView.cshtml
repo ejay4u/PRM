@@ -1,0 +1,18 @@
+﻿@model PRM.ViewModels.LabViewModel
+@{
+    Layout = null;
+}
+
+@Html.ListBoxFor(m => m.LabRequest.Examinationtype, Model.ExaminationTypeList, new { @id = "ExaminationType-DropdownID", htmlAttributes = new { @class = "form-control select2", style = "width: 100%" } })
+
+
+
+@*<script type="text/javascript">
+    $(document).ready(function() {
+        $('#Category-DropdownID').change(function () {
+            var selectedCategory = this.value;
+            console.log(selectedCategory);
+            $('#CampaignContainer').load('@Url.Action("CodeCampaignListView")?category=' + selectedCategory);
+        });
+    });
+</script>*@
