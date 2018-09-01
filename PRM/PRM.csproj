@@ -726,11 +726,6 @@
     <Content Include="Views\Dashboard\Client.cshtml" />
     <Content Include="Views\Dashboard\UltraSound.cshtml" />
     <Content Include="Views\Dashboard\AddCampaignCountry.cshtml" />
-    <Content Include="Views\BusinessInfo\Create.cshtml" />
-    <Content Include="Views\BusinessInfo\Index.cshtml" />
-    <Content Include="Views\Campaign\Create.cshtml" />
-    <Content Include="Views\Campaign\Index.cshtml" />
-    <Content Include="Views\Code\Index.cshtml" />
     <Content Include="Views\Dashboard\GeneralAd.cshtml" />
     <Content Include="Views\Dashboard\CampaignAd.cshtml" />
     <Content Include="Views\Dashboard\CampaignListView.cshtml" />

@@ -90,3 +90,4 @@ C:\Users\Jude\Documents\Visual Studio 2015\Projects\PRM\PRM\bin\Microsoft.AspNet
 C:\Users\Jude\Documents\Visual Studio 2015\Projects\PRM\PRM\bin\Microsoft.AspNet.Identity.EntityFramework.xml
 C:\Users\Jude\Documents\Visual Studio 2015\Projects\PRM\PRM\obj\Debug\PRM.dll
 C:\Users\Jude\Documents\Visual Studio 2015\Projects\PRM\PRM\obj\Debug\PRM.pdb
+C:\Users\Jude\Documents\Visual Studio 2015\Projects\PRM\PRM\obj\Debug\PRM.csprojResolveAssemblyReference.cache
